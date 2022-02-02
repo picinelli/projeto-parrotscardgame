@@ -1,0 +1,50 @@
+main {
+    background-color: #EEF9BF;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+header {
+    background-color: #EEF9BF;
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+}
+header > h1 {
+    color: #75B79E;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 56px;
+    margin-top: 40px;
+    margin-bottom: 47px;
+}
+section {
+    width: 100%;
+}
+.mesa {
+    width: 100%;
+    background-color: blue;
+    height: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    display: flex;
+}
+.carta {
+    width: 117px;
+    height: 146px;
+    background-color: #A7E9AF;
+    border: 1px solid #99CEA8;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 34px;
+    margin-bottom: 34px;
+}
+.carta > img {
+    width: 100px;
+    height: 100px;
+}
