@@ -1,26 +1,58 @@
 let mesa = document.querySelector('.mesa')
-function criarCartas() {
+let perguntaQuantidade = null
+let imagens = ['bobrossparrot.gif', 'explodyparrot.gif', 'fiestaparrot.gif', 'metalparrot.gif', 'revertitparrot.gif', 'tripletsparrot.gif', 'unicornparrot.gif']
+let imagensPares = []
+const faceTraseiraArr = document.querySelectorAll('.back-face');
+
 // Pergunta ao jogador a quantidade de cartas que quer jogar, limitado de 4 a 14
-    const perguntaQuantidade = parseInt(window.prompt('Escolha uma quantidade PAR de cartas de 4 a 14'));
+function perguntaCartas() {
+    perguntaQuantidade = parseInt(window.prompt('Escolha uma quantidade PAR de cartas de 4 a 14'));
     if (perguntaQuantidade % 2 !== 0) {
         window.alert('Por favor, escolha um numero PAR de 4 a 14!')
-        criarCartas()
+        perguntaCartas()
     } else if (perguntaQuantidade < 4) {
         window.alert('Por favor, escolha um numero maior que 3!')
-        criarCartas()
+        perguntaCartas()
     } else if (perguntaQuantidade > 14) {
         window.alert('Por favor, escolha um numero menor que 15!')
+        perguntaCartas()
+    } else {
+        misturaCarta()
         criarCartas()
     }
+}
 // Criacao de cartas mediante a quantidade de cartas escolhidas pelo jogador
+function criarCartas () {
     let contador = 0
-    while (contador < perguntaQuantidade) {
+    while (contador < (perguntaQuantidade)) {
     mesa.innerHTML = mesa.innerHTML + `
-    <div class="carta">
-    <img src="conteudo/papagaio-padrao.svg" alt="">
+    <div class="card">
+        <div class="front-face face">
+            <img src="conteudo/papagaio-padrao.svg" alt="Papagaio-Padrao">
+        </div>
+        <div class="back-face face">
+        <img src="conteudo/${imagensPares[contador]}" alt="Papagaio-Verso">
+        </div>
     </div>
     `
     contador++
     }
 }
-criarCartas()
+function comparador() { 
+	return Math.random() - 0.5; 
+}
+function misturaCarta() {
+    for (let i = 0; i < (perguntaQuantidade / 2); i++) {
+        imagens.sort(comparador)
+        imagensPares.push(imagens[0])
+        imagensPares.push(imagens[0])
+        imagens.shift()
+    }
+    imagensPares.sort(comparador)
+}
+
+
+perguntaCartas()
+misturaCarta()
+
+// Mudar o verso de acordo com as cartas 
