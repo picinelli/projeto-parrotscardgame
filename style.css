@@ -1,3 +1,6 @@
+body {
+    background-color: #EEF9BF;
+}
 main {
     background-color: #EEF9BF;
     width: 100vw;
@@ -49,7 +52,6 @@ section {
     height: 146px;
     background-color: #A7E9AF;
     border: 1px solid #99CEA8;
-    border-radius: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -92,11 +94,11 @@ section {
     width: 80%;
 }
 
-.card:hover .back-face {
+.virar-tras {
     transform: rotateY(0deg);
 }
 
-.card:hover .front-face {
+.virar-frente {
     transform: rotateY(-180deg);
 }
 
