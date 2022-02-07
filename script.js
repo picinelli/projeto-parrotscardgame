@@ -98,6 +98,7 @@ function desvirarCartas(carta) {
     carta.querySelector('.front-face').classList.remove('virar-frente');
     carta.querySelector('.back-face').classList.remove('virar-tras');
 }
+// funcao que checa se todas as cartas estao viradas e envia alert parabenizando
 function checarFim() {
     contadorFim++
     if (contadorFim === (perguntaQuantidade / 2)) {
@@ -106,6 +107,7 @@ function checarFim() {
         perguntaIniciarNovamente();
     }
 }
+// funcao que pergunta se o player deseja jogar novamente, caso tenha ganhado.
 function perguntaIniciarNovamente () {
     let pergunta = window.prompt('Gostaria de jogar novamente? (s ou n)');
     if (pergunta === 'n') {
@@ -121,8 +123,11 @@ function perguntaIniciarNovamente () {
         imagens = ['bobrossparrot.gif', 'explodyparrot.gif', 'fiestaparrot.gif', 'metalparrot.gif', 'revertitparrot.gif', 'tripletsparrot.gif', 'unicornparrot.gif'];
         perguntaCartas();
         cronometro.innerHTML = 0;
+    } else {
+        perguntaIniciarNovamente();
     }
 }
+// funcao apenas para aumentar o cronometro de 1 em 1
 function comecarCronometro() {
     cronometro.innerHTML = parseInt(cronometro.innerHTML) + 1;
 }
@@ -131,5 +136,3 @@ function comecarCronometro() {
 
 perguntaCartas()
 misturaCarta()
-
-// Mudar o verso de acordo com as cartas 
