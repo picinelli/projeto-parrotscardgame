@@ -2,30 +2,32 @@ let mesa = document.querySelector('.mesa');
 let perguntaQuantidade = null;
 let imagens = ['bobrossparrot.gif', 'explodyparrot.gif', 'fiestaparrot.gif', 'metalparrot.gif', 'revertitparrot.gif', 'tripletsparrot.gif', 'unicornparrot.gif'];
 let imagensPares = [];
-let contadorFim = 0
-let contadorJogadas = 0
+let contadorFim = 0;
+let contadorJogadas = 0;
+let iniciador = null;
+let cronometro = document.querySelector('.cronometro');
 
 
 // Pergunta ao jogador a quantidade de cartas que quer jogar, limitado de 4 a 14
 function perguntaCartas() {
     perguntaQuantidade = parseInt(window.prompt('Escolha uma quantidade PAR de cartas de 4 a 14'));
     if (perguntaQuantidade % 2 !== 0) {
-        window.alert('Por favor, escolha um numero PAR de 4 a 14!')
-        perguntaCartas()
+        window.alert('Por favor, escolha um numero PAR de 4 a 14!');
+        perguntaCartas();
     } else if (perguntaQuantidade < 4) {
-        window.alert('Por favor, escolha um numero maior que 3!')
-        perguntaCartas()
+        window.alert('Por favor, escolha um numero maior que 3!');
+        perguntaCartas();
     } else if (perguntaQuantidade > 14) {
-        window.alert('Por favor, escolha um numero menor que 15!')
-        perguntaCartas()
+        window.alert('Por favor, escolha um numero menor que 15!');
+        perguntaCartas();
     } else {
-        misturaCarta()
-        criarCartas()
+        misturaCarta();
+        criarCartas();
     }
 }
 // Criacao de cartas mediante a quantidade de cartas escolhidas pelo jogador
 function criarCartas () {
-    let contador = 0
+    let contador = 0;
     while (contador < (perguntaQuantidade)) {
     mesa.innerHTML = mesa.innerHTML + `
     <div class="card" onclick="virarCartas(this)" data-identifier="card">
@@ -37,8 +39,9 @@ function criarCartas () {
         </div>
     </div>
     `
-    contador++
+    contador++;
     }
+    iniciador = setInterval(comecarCronometro, 1000)
 }
 // funcao dada pelo exercicio para embaralhar
 function comparador() { 
@@ -47,12 +50,12 @@ function comparador() {
 // Push em array para formar Pares de carta e Mistura para aleatoriedade
 function misturaCarta() {
     for (let i = 0; i < (perguntaQuantidade / 2); i++) {
-        imagens.sort(comparador)
-        imagensPares.push(imagens[0])
-        imagensPares.push(imagens[0])
-        imagens.shift()
+        imagens.sort(comparador);
+        imagensPares.push(imagens[0]);
+        imagensPares.push(imagens[0]);
+        imagens.shift();
     }
-    imagensPares.sort(comparador)
+    imagensPares.sort(comparador);
 }
 // Define as ações das cartas no clique
 function virarCartas(elemento) {
@@ -66,11 +69,11 @@ function virarCartas(elemento) {
         if (carta1 === carta2) {
             manterCartasViradas(elemento);
             manterCartasViradas(cartaVirada.parentNode);
-            setTimeout(() => checarFim(), 1000)
+            setTimeout(() => checarFim(), 1000);
 // se as cartas forem diferentes, aguardar 1s e desvirar
         } else if (carta1 !== carta2) {
             virarCarta(elemento);
-            setTimeout(() => desvirarCartas(elemento), 1000)
+            setTimeout(() => desvirarCartas(elemento), 1000);
             setTimeout(() => desvirarCartas(cartaVirada.parentNode), 1000);
         }
 // se nenhum dos casos anteriores acontecerem, será a primeira carta clicada
@@ -98,25 +101,30 @@ function desvirarCartas(carta) {
 function checarFim() {
     contadorFim++
     if (contadorFim === (perguntaQuantidade / 2)) {
-        window.alert(`Parabéns! Você ganhou em ${contadorJogadas} jogadas!`)
-        perguntaIniciarNovamente()
+        clearInterval(iniciador);
+        window.alert(`Parabéns! Você ganhou em ${contadorJogadas} jogadas e em ${parseInt(cronometro.innerHTML)} segundos!`);
+        perguntaIniciarNovamente();
     }
 }
 function perguntaIniciarNovamente () {
-    let pergunta = window.prompt('Gostaria de jogar novamente? (s ou n)')
+    let pergunta = window.prompt('Gostaria de jogar novamente? (s ou n)');
     if (pergunta === 'n') {
-        window.alert('Tudo certo! Obrigado por jogar :)')
+        window.alert('Tudo certo! Obrigado por jogar :)');
     } else if (pergunta === 's') {
         // declarando as variaveis novamente para resetar o jogo e chamando a funcao 
         // "perguntaCartas" para reiniciar todo o processo
         mesa.innerHTML = '';
-        perguntaQuantidade = null
+        perguntaQuantidade = null;
         imagensPares = [];
-        contadorFim = 0
-        contadorJogadas = 0
-        imagens = ['bobrossparrot.gif', 'explodyparrot.gif', 'fiestaparrot.gif', 'metalparrot.gif', 'revertitparrot.gif', 'tripletsparrot.gif', 'unicornparrot.gif']
+        contadorFim = 0;
+        contadorJogadas = 0;
+        imagens = ['bobrossparrot.gif', 'explodyparrot.gif', 'fiestaparrot.gif', 'metalparrot.gif', 'revertitparrot.gif', 'tripletsparrot.gif', 'unicornparrot.gif'];
         perguntaCartas();
+        cronometro.innerHTML = 0;
     }
+}
+function comecarCronometro() {
+    cronometro.innerHTML = parseInt(cronometro.innerHTML) + 1;
 }
 
 

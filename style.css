@@ -26,7 +26,6 @@ header > h1 {
     font-weight: bold;
     font-size: 56px;
     margin-top: 40px;
-    margin-bottom: 47px;
 }
 
 section {
@@ -37,6 +36,17 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+.cronometro {
+    font-size: 2rem;
+    color: red;
+    font-family: Roboto;
+    font-style: normal;
+    width: 100vw;
+    margin: 27px 0;
+    margin-right: 250px;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .mesa {
@@ -102,5 +112,9 @@ section {
     }
     section {
         max-width: 200px;
+    }
+    .cronometro {
+        margin-right: 0;
+        justify-content: center;
     }
 }
